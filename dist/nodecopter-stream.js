@@ -124,6 +124,23 @@
         callbackOnce = callback;
     };
 
+    NS.prototype.getImageData = function (rgbaData, x, y, w, h) {
+        var gl = webGLCanvas.gl;
+
+        gl.readPixels(
+            x || 0, y || 0, w || width, h || height,
+            gl.RGBA, gl.UNSIGNED_BYTE,
+            rgbaData
+        );
+        // instead of virtically flippiong the data, we just leave it
+        // flipped a invert the coords later:
+        return;
+    };
+
+    NS.prototype.getCanvas = function () {
+        return webGLCanvas.canvas;
+    };
+
     window.NodecopterStream = NS;
 
 }(window, document, undefined));
